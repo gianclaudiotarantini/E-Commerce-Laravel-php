@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ShopControler extends Controller
 {
-    public function index() {
-        return view('shop');
-    }
+    public function index()
+{
+    $products = Product::orderBy('created_at','DESC')->paginate(12);
+    return view('shop',['products'=>$products]);
+}   
 }
